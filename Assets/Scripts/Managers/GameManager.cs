@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [Header("Scene references")]
     public GameObject m_goPlayerObject;
     public GameObject m_goCamera;
+    private Camera m_gcCamera;
     public Transform m_tGunContainer;
     public Transform m_tBackgroundContainer;
     public ParticleSystem m_psEnemyDeathParticles;
@@ -23,10 +24,14 @@ public class GameManager : MonoBehaviour
     public float m_fParallaxMultiplier = 1.2f;
     public Vector2 m_vSpawnTimeRange = new Vector2(3f, 6f); // Vector2 used to define min and max of a random timer
     private float m_fSpawnTimer = 0f;
+    public Vector2 m_vWeedSpawnTimeRange = new Vector2(5f, 8f);
+    private float m_fWeedSpawnTimer = 0f;
 
     [Header("Enemies")]
     [SerializeField]
     private GameObject[] m_goEnemyPrefabs = null;
+    [SerializeField]
+    private GameObject m_goWeedPrefab = null;
 
     [Header("Score")]
     public int m_iScore = 0;
@@ -51,18 +56,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        m_gcCamera = m_goCamera.GetComponent<Camera>();
+    }
+
     private void Update()
     {
         ScrollBackgrounds();
         SpawnEnemies();
+        SpawnWeed();
     }
 
     void ScrollBackgrounds()
     {
         foreach (Transform image in m_tBackgroundContainer)
         {
-            if ((m_goCamera.transform.position.x - image.position.x) >= 30f)
-                image.Translate(-m_vScrollDirection.normalized * 60f);
+            if ((m_goCamera.transform.position.x - image.position.x) >= 45f)
+                image.Translate(-m_vScrollDirection.normalized * 90f);
             image.Translate(m_vScrollDirection * m_fParallaxMultiplier * Time.deltaTime);
         }
     }
@@ -73,8 +84,19 @@ public class GameManager : MonoBehaviour
             return;
         if ((m_fSpawnTimer -= Time.deltaTime) <= 0f)
         {
-            Instantiate(m_goEnemyPrefabs[Random.Range(0, m_goEnemyPrefabs.Length)], new Vector2(14f, Random.Range(-3f, 3f)), Quaternion.identity);
+            float spawnDistance = m_gcCamera.orthographicSize * (Screen.width / Screen.height);
+            Instantiate(m_goEnemyPrefabs[Random.Range(0, m_goEnemyPrefabs.Length)], new Vector2(spawnDistance + 4f, Random.Range(-4f, 4f)), Quaternion.identity);
             m_fSpawnTimer = Random.Range(m_vSpawnTimeRange.x, m_vSpawnTimeRange.y);
+        }
+    }
+
+    void SpawnWeed()
+    {
+        if ((m_fWeedSpawnTimer -= Time.deltaTime) <= 0f)
+        {
+            float spawnDistance = m_gcCamera.orthographicSize * (Screen.width / Screen.height);
+            Instantiate(m_goWeedPrefab, new Vector2(spawnDistance + 4f, -5), Quaternion.identity);
+            m_fWeedSpawnTimer = Random.Range(m_vWeedSpawnTimeRange.x, m_vWeedSpawnTimeRange.y);
         }
     }
 

@@ -18,9 +18,9 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField]
     private float m_fMinShootMagnitude = 0.5f;
     [SerializeField]
-    private float m_fThrowForceMultiplier = 1f;
+    private float m_fThrowForceMultiplier = 300f;
     [SerializeField]
-    private float m_fThrowTorque = 1f;
+    private Vector2 m_fThrowTorqueRange = new Vector2(200f, 450f);
 
     [Header("Guns!")]
     [SerializeField]
@@ -62,7 +62,7 @@ public class PlayerShooting : MonoBehaviour
         GameObject newGun = Instantiate(m_goGuns[Random.Range(0, m_goGuns.Length)], transform.position, Quaternion.identity, GameManager.instance.m_tGunContainer);
         Rigidbody2D gunRB = newGun.GetComponent<Rigidbody2D>();
         gunRB.AddForce(m_vMouseDirection * m_fMagnitude * m_fThrowForceMultiplier);
-        gunRB.AddTorque(m_fThrowTorque);
+        gunRB.AddTorque(Random.Range(m_fThrowTorqueRange.x, m_fThrowTorqueRange.y));
         AudioManager.PlayClip("Throw");
     }
 }

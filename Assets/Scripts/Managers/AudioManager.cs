@@ -32,9 +32,11 @@ public class AudioManager : MonoBehaviour
         {
             if (sound.m_sName == name)
             {
-                instance.m_gcAudioSource.PlayOneShot(sound.m_sClip, Mathf.Clamp01(volume));
+                instance.m_gcAudioSource.PlayOneShot(sound.m_sClip, Mathf.Clamp01(volume) * sound.m_fVolumeMult);
+                return;
             }
         }
+        Debug.LogWarning("Sound \"" + name + "\" not found!");
     }
 
     public static void PlayClip(string name)

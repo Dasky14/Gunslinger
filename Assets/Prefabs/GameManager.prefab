@@ -243,6 +243,9 @@ MonoBehaviour:
   m_psEnemyDeathParticles: {fileID: 5369916054280246732}
   m_vScrollDirection: {x: -3, y: 0}
   m_fParallaxMultiplier: 1.2
+  m_vSpawnTimeRange: {x: 3, y: 6}
+  m_goEnemyPrefabs:
+  - {fileID: 1715130046583911340, guid: 1d4c613d6e109f845bcacfad0ecd7b6b, type: 3}
   m_iScore: 0
 --- !u!1 &6920772536670237880
 GameObject:

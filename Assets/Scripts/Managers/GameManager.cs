@@ -19,6 +19,12 @@ public class GameManager : MonoBehaviour
     [Header("Level variables")]
     public Vector2 m_vScrollDirection = Vector2.zero;
     public float m_fParallaxMultiplier = 1.2f;
+    public Vector2 m_vSpawnTimeRange = new Vector2(3f, 6f); // Vector2 used to define min and max of a random timer
+    private float m_fSpawnTimer = 0f;
+
+    [Header("Enemies")]
+    [SerializeField]
+    private GameObject[] m_goEnemyPrefabs = null;
 
     [Header("Score")]
     public int m_iScore = 0;
@@ -36,6 +42,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         ScrollBackgrounds();
+        SpawnEnemies();
     }
 
     void ScrollBackgrounds()
@@ -45,6 +52,17 @@ public class GameManager : MonoBehaviour
             if ((m_goCamera.transform.position.x - image.position.x) >= 30f)
                 image.Translate(-m_vScrollDirection.normalized * 60f);
             image.Translate(m_vScrollDirection * m_fParallaxMultiplier * Time.deltaTime);
+        }
+    }
+
+    void SpawnEnemies()
+    {
+        if (m_goEnemyPrefabs == null || m_goEnemyPrefabs.Length == 0)
+            return;
+        if ((m_fSpawnTimer -= Time.deltaTime) <= 0f)
+        {
+            Instantiate(m_goEnemyPrefabs[Random.Range(0, m_goEnemyPrefabs.Length)], new Vector2(14f, Random.Range(-3f, 3f)), Quaternion.identity);
+            m_fSpawnTimer = Random.Range(m_vSpawnTimeRange.x, m_vSpawnTimeRange.y);
         }
     }
 

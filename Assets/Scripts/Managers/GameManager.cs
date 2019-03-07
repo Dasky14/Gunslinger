@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public ParticleSystem m_psEnemyDeathParticles;
 
     [Header("Level variables")]
+    [SerializeField]
+    private bool m_bLoadUI = true;
     public Vector2 m_vScrollDirection = Vector2.zero;
     public float m_fParallaxMultiplier = 1.2f;
     public Vector2 m_vSpawnTimeRange = new Vector2(3f, 6f); // Vector2 used to define min and max of a random timer
@@ -37,6 +39,16 @@ public class GameManager : MonoBehaviour
             instance = this;
         else
             Destroy(gameObject);
+
+        if (m_bLoadUI)
+        {
+            if (!UIManager.instance)
+            {
+#if UNITY_EDITOR
+                UnityEngine.SceneManagement.SceneManager.LoadScene(0, UnityEngine.SceneManagement.LoadSceneMode.Additive);
+#endif
+            }
+        }
     }
 
     private void Update()
@@ -71,6 +83,7 @@ public class GameManager : MonoBehaviour
         if (!instance)
             return;
         instance.m_iScore += score;
+        UIManager.instance?.UpdateScoreText();
         instance.m_psEnemyDeathParticles.transform.position = pos;
         instance.m_psEnemyDeathParticles.Play();
 

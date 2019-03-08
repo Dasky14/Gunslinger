@@ -2,113 +2,116 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace Dasky14.Gunslinger
 {
-
-    public static GameManager instance;
-
-    #region Variables
-
-    [Header("Scene references")]
-    public GameObject m_goPlayerObject;
-    public GameObject m_goCamera;
-    private Camera m_gcCamera;
-    public Transform m_tGunContainer;
-    public Transform m_tBackgroundContainer;
-    public ParticleSystem m_psEnemyDeathParticles;
-
-    [Header("Level variables")]
-    [SerializeField]
-    private bool m_bLoadUI = true;
-    public Vector2 m_vScrollDirection = Vector2.zero;
-    public float m_fParallaxMultiplier = 1.2f;
-    public Vector2 m_vSpawnTimeRange = new Vector2(3f, 6f); // Vector2 used to define min and max of a random timer
-    private float m_fSpawnTimer = 0f;
-    public Vector2 m_vWeedSpawnTimeRange = new Vector2(5f, 8f);
-    private float m_fWeedSpawnTimer = 0f;
-
-    [Header("Enemies")]
-    [SerializeField]
-    private GameObject[] m_goEnemyPrefabs = null;
-    [SerializeField]
-    private GameObject m_goWeedPrefab = null;
-
-    [Header("Score")]
-    public int m_iScore = 0;
-
-    #endregion
-
-    private void Awake()
+    public class GameManager : MonoBehaviour
     {
-        if (instance == null)
-            instance = this;
-        else
-            Destroy(gameObject);
 
-        if (m_bLoadUI)
+        public static GameManager instance;
+
+        #region Variables
+
+        [Header("Scene references")]
+        public GameObject m_goPlayerObject;
+        public GameObject m_goCamera;
+        private Camera m_gcCamera;
+        public Transform m_tGunContainer;
+        public Transform m_tBackgroundContainer;
+        public ParticleSystem m_psEnemyDeathParticles;
+
+        [Header("Level variables")]
+        [SerializeField]
+        private bool m_bLoadUI = true;
+        public Vector2 m_vScrollDirection = Vector2.zero;
+        public float m_fParallaxMultiplier = 1.2f;
+        public Vector2 m_vSpawnTimeRange = new Vector2(3f, 6f); // Vector2 used to define min and max of a random timer
+        private float m_fSpawnTimer = 0f;
+        public Vector2 m_vWeedSpawnTimeRange = new Vector2(5f, 8f);
+        private float m_fWeedSpawnTimer = 0f;
+
+        [Header("Enemies")]
+        [SerializeField]
+        private GameObject[] m_goEnemyPrefabs = null;
+        [SerializeField]
+        private GameObject m_goWeedPrefab = null;
+
+        [Header("Score")]
+        public int m_iScore = 0;
+
+        #endregion
+
+        private void Awake()
         {
-            if (!UIManager.instance)
+            if (instance == null)
+                instance = this;
+            else
+                Destroy(gameObject);
+
+            if (m_bLoadUI)
             {
-#if UNITY_EDITOR
-                UnityEngine.SceneManagement.SceneManager.LoadScene(0, UnityEngine.SceneManagement.LoadSceneMode.Additive);
-#endif
+                if (!UIManager.instance)
+                {
+    #if UNITY_EDITOR
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(0, UnityEngine.SceneManagement.LoadSceneMode.Additive);
+    #endif
+                }
             }
         }
-    }
 
-    private void Start()
-    {
-        m_gcCamera = m_goCamera.GetComponent<Camera>();
-    }
-
-    private void Update()
-    {
-        ScrollBackgrounds();
-        SpawnEnemies();
-        SpawnWeed();
-    }
-
-    void ScrollBackgrounds()
-    {
-        foreach (Transform image in m_tBackgroundContainer)
+        private void Start()
         {
-            if ((m_goCamera.transform.position.x - image.position.x) >= 45f)
-                image.Translate(-m_vScrollDirection.normalized * 90f);
-            image.Translate(m_vScrollDirection * m_fParallaxMultiplier * Time.deltaTime);
+            m_gcCamera = m_goCamera.GetComponent<Camera>();
         }
-    }
 
-    void SpawnEnemies()
-    {
-        if (m_goEnemyPrefabs == null || m_goEnemyPrefabs.Length == 0)
-            return;
-        if ((m_fSpawnTimer -= Time.deltaTime) <= 0f)
+        private void Update()
         {
-            float spawnDistance = m_gcCamera.orthographicSize * (Screen.width / Screen.height);
-            Instantiate(m_goEnemyPrefabs[Random.Range(0, m_goEnemyPrefabs.Length)], new Vector2(spawnDistance + 4f, Random.Range(-4f, 4f)), Quaternion.identity);
-            m_fSpawnTimer = Random.Range(m_vSpawnTimeRange.x, m_vSpawnTimeRange.y);
+            ScrollBackgrounds();
+            SpawnEnemies();
+            SpawnWeed();
         }
-    }
 
-    void SpawnWeed()
-    {
-        if ((m_fWeedSpawnTimer -= Time.deltaTime) <= 0f)
+        void ScrollBackgrounds()
         {
-            float spawnDistance = m_gcCamera.orthographicSize * (Screen.width / Screen.height);
-            Instantiate(m_goWeedPrefab, new Vector2(spawnDistance + 4f, -5), Quaternion.identity);
-            m_fWeedSpawnTimer = Random.Range(m_vWeedSpawnTimeRange.x, m_vWeedSpawnTimeRange.y);
+            foreach (Transform image in m_tBackgroundContainer)
+            {
+                if ((m_goCamera.transform.position.x - image.position.x) >= 45f)
+                    image.Translate(-m_vScrollDirection.normalized * 90f);
+                image.Translate(m_vScrollDirection * m_fParallaxMultiplier * Time.deltaTime);
+            }
         }
-    }
 
-    public static void EnemyDeath(Vector2 pos, int score)
-    {
-        if (!instance)
-            return;
-        instance.m_iScore += score;
-        UIManager.instance?.UpdateScoreText();
-        instance.m_psEnemyDeathParticles.transform.position = pos;
-        instance.m_psEnemyDeathParticles.Play();
+        void SpawnEnemies()
+        {
+            if (m_goEnemyPrefabs == null || m_goEnemyPrefabs.Length == 0)
+                return;
+            if ((m_fSpawnTimer -= Time.deltaTime) <= 0f)
+            {
+                float spawnDistance = m_gcCamera.orthographicSize * (Screen.width / Screen.height);
+                Instantiate(m_goEnemyPrefabs[Random.Range(0, m_goEnemyPrefabs.Length)], new Vector2(spawnDistance + 4f, Random.Range(-4f, 4f)), Quaternion.identity);
+                m_fSpawnTimer = Random.Range(m_vSpawnTimeRange.x, m_vSpawnTimeRange.y);
+            }
+        }
 
-        AudioManager.PlayClip("DeathFart");
+        void SpawnWeed()
+        {
+            if ((m_fWeedSpawnTimer -= Time.deltaTime) <= 0f)
+            {
+                float spawnDistance = m_gcCamera.orthographicSize * (Screen.width / Screen.height);
+                Instantiate(m_goWeedPrefab, new Vector2(spawnDistance + 4f, -5), Quaternion.identity);
+                m_fWeedSpawnTimer = Random.Range(m_vWeedSpawnTimeRange.x, m_vWeedSpawnTimeRange.y);
+            }
+        }
+
+        public static void EnemyDeath(Vector2 pos, int score)
+        {
+            if (!instance)
+                return;
+            instance.m_iScore += score;
+            UIManager.instance?.UpdateScoreText();
+            instance.m_psEnemyDeathParticles.transform.position = pos;
+            instance.m_psEnemyDeathParticles.Play();
+
+            AudioManager.PlayClip("DeathFart");
+        }
     }
 }

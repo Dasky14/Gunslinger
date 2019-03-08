@@ -4,36 +4,39 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+namespace Dasky14.Gunslinger
 {
-    public static UIManager instance;
-
-    public TextMeshProUGUI m_gcScoreText = null;
-    public Image m_gcHealthBar = null;
-
-    private void Awake()
+    public class UIManager : MonoBehaviour
     {
-        if (instance == null)
-            instance = this;
-        else
-            Destroy(gameObject);
-    }
+        public static UIManager instance;
+
+        public TextMeshProUGUI m_gcScoreText = null;
+        public Image m_gcHealthBar = null;
+
+        private void Awake()
+        {
+            if (instance == null)
+                instance = this;
+            else
+                Destroy(gameObject);
+        }
     
-    private void Update()
-    {
-        UpdateHealthBar();
-    }
+        private void Update()
+        {
+            UpdateHealthBar();
+        }
 
-    void UpdateHealthBar()
-    {
-        float currentFill = m_gcHealthBar.fillAmount;
-        float healthPercentage = (float) PlayerHealth.c_iHealth / PlayerHealth.c_iMaxHealth;
-        currentFill = Mathf.Lerp(currentFill, healthPercentage, 5f * Time.deltaTime);
-        m_gcHealthBar.fillAmount = currentFill;
-    }
+        void UpdateHealthBar()
+        {
+            float currentFill = m_gcHealthBar.fillAmount;
+            float healthPercentage = (float) PlayerHealth.c_iHealth / PlayerHealth.c_iMaxHealth;
+            currentFill = Mathf.Lerp(currentFill, healthPercentage, 5f * Time.deltaTime);
+            m_gcHealthBar.fillAmount = currentFill;
+        }
 
-    public void UpdateScoreText()
-    {
-        m_gcScoreText.text = GameManager.instance.m_iScore.ToString();
+        public void UpdateScoreText()
+        {
+            m_gcScoreText.text = GameManager.instance.m_iScore.ToString();
+        }
     }
 }

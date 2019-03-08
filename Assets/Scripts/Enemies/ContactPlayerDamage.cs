@@ -2,42 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ContactPlayerDamage : MonoBehaviour
+namespace Dasky14.Gunslinger
 {
-    private float m_fDamageTimer = 0f;
-    public float m_fDamageInterval = 0.5f;
-    public bool m_bCanDamage = true;
-
-    private void Update()
+    public class ContactPlayerDamage : MonoBehaviour
     {
-        if ((m_fDamageTimer -= Time.deltaTime) <= 0f)
+        private float m_fDamageTimer = 0f;
+        public float m_fDamageInterval = 0.5f;
+        public bool m_bCanDamage = true;
+
+        private void Update()
         {
-            m_bCanDamage = true;
+            if ((m_fDamageTimer -= Time.deltaTime) <= 0f)
+            {
+                m_bCanDamage = true;
+            }
+            else
+            {
+                m_bCanDamage = false;
+            }
         }
-        else
+
+        private void OnCollisionEnter2D(Collision2D collision)
         {
-            m_bCanDamage = false;
+            if (collision.gameObject.tag == "Player")
+                TheDamage();
         }
-    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-            TheDamage();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-            TheDamage();
-    }
-
-    void TheDamage()
-    {
-        if (m_bCanDamage)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            PlayerHealth.TakeDamage();
-            m_fDamageTimer = m_fDamageInterval;
+            if (collision.gameObject.tag == "Player")
+                TheDamage();
+        }
+
+        void TheDamage()
+        {
+            if (m_bCanDamage)
+            {
+                PlayerHealth.TakeDamage();
+                m_fDamageTimer = m_fDamageInterval;
+            }
         }
     }
 }

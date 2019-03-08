@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour
+namespace Dasky14.Gunslinger
 {
-    [SerializeField]
-    private int m_iHealth = 3;
-
-    public void TakeDamage()
+    public class EnemyHealth : MonoBehaviour
     {
-        m_iHealth--;
-        if (m_iHealth <= 0)
+        [SerializeField]
+        private int m_iHealth = 3;
+
+        public void TakeDamage()
         {
-            GameManager.EnemyDeath(transform.position, 1);
-            Destroy(gameObject);
+            m_iHealth--;
+            if (m_iHealth <= 0)
+            {
+                GameManager.EnemyDeath(transform.position, 1);
+                Destroy(gameObject);
+            }
         }
     }
 }

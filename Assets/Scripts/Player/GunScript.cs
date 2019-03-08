@@ -2,77 +2,80 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunScript : MonoBehaviour
+namespace Dasky14.Gunslinger
 {
-    [SerializeField]
-    private Transform m_tShootPoint = null;
-    [SerializeField]
-    private GameObject m_goBulletPrefab = null;
-    [SerializeField]
-    private int m_iAmmo = 6;
-    [SerializeField]
-    private float m_fFireInterval = 0.75f;
-    private float m_fFireTimer = 0f;
-
-    private float m_fTimeToDie = 30f;
-    private float m_fCollisionTimeToDie = 5f;
-    private float m_fDieTimer = 0f;
-    private bool m_bIsDead = false;
-    private bool m_bHasCollided = false;
-
-    private void Start()
+    public class GunScript : MonoBehaviour
     {
-        m_fDieTimer = m_fTimeToDie;
-    }
-    
-    void Update()
-    {
-        m_fFireTimer -= Time.deltaTime;
+        [SerializeField]
+        private Transform m_tShootPoint = null;
+        [SerializeField]
+        private GameObject m_goBulletPrefab = null;
+        [SerializeField]
+        private int m_iAmmo = 6;
+        [SerializeField]
+        private float m_fFireInterval = 0.75f;
+        private float m_fFireTimer = 0f;
 
-        m_fDieTimer -= Time.deltaTime;
-        if (m_fDieTimer <= 0f)
-            Die();
-    }
+        private float m_fTimeToDie = 30f;
+        private float m_fCollisionTimeToDie = 5f;
+        private float m_fDieTimer = 0f;
+        private bool m_bIsDead = false;
+        private bool m_bHasCollided = false;
 
-    void Die()
-    {
-        if (!m_bIsDead)
+        private void Start()
         {
-            m_bIsDead = true;
-            Destroy(gameObject, 5);
+            m_fDieTimer = m_fTimeToDie;
+        }
+    
+        void Update()
+        {
+            m_fFireTimer -= Time.deltaTime;
+
+            m_fDieTimer -= Time.deltaTime;
+            if (m_fDieTimer <= 0f)
+                Die();
         }
 
-        Vector3 oldScale = transform.localScale;
-        transform.localScale = Vector3.Lerp(oldScale, Vector3.zero, 0.5f * Time.deltaTime);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (!m_bHasCollided)
+        void Die()
         {
-            m_bHasCollided = true;
-            m_fDieTimer = m_fCollisionTimeToDie;
-
-            // Could use a delegate or something for this,
-            // but SendMessage() is probably fine for rarer events and to objects with few components
-            if (collision.gameObject.tag == "Enemy")
+            if (!m_bIsDead)
             {
-                collision.gameObject.SendMessage("TakeDamage");
+                m_bIsDead = true;
+                Destroy(gameObject, 5);
+            }
+
+            Vector3 oldScale = transform.localScale;
+            transform.localScale = Vector3.Lerp(oldScale, Vector3.zero, 0.5f * Time.deltaTime);
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (!m_bHasCollided)
+            {
+                m_bHasCollided = true;
+                m_fDieTimer = m_fCollisionTimeToDie;
+
+                // Could use a delegate or something for this,
+                // but SendMessage() is probably fine for rarer events and to objects with few components
+                if (collision.gameObject.tag == "Enemy")
+                {
+                    collision.gameObject.SendMessage("TakeDamage");
+                }
+            }
+
+            if ((m_fFireTimer) <= 0f)
+            {
+                Shoot();
+                m_fFireTimer = m_fFireInterval;
             }
         }
 
-        if ((m_fFireTimer) <= 0f)
+        void Shoot()
         {
-            Shoot();
-            m_fFireTimer = m_fFireInterval;
+            if (m_iAmmo <= 0)
+                return;
+            m_iAmmo--;
+            Instantiate(m_goBulletPrefab, m_tShootPoint.position, transform.rotation);
         }
-    }
-
-    void Shoot()
-    {
-        if (m_iAmmo <= 0)
-            return;
-        m_iAmmo--;
-        Instantiate(m_goBulletPrefab, m_tShootPoint.position, transform.rotation);
     }
 }

@@ -24,6 +24,7 @@ namespace Dasky14.Gunslinger
         private void Update()
         {
             UpdateHealthBar();
+            print(GetScoreWorldPos());
         }
 
         void UpdateHealthBar()
@@ -37,6 +38,12 @@ namespace Dasky14.Gunslinger
         public void UpdateScoreText()
         {
             m_gcScoreText.text = GameManager.instance.m_iScore.ToString();
+        }
+
+        public Vector2 GetScoreWorldPos()
+        {
+            Vector2 position = GameManager.instance.m_gcCamera.ScreenToWorldPoint(m_gcScoreText.transform.position);
+            return position;
         }
     }
 }

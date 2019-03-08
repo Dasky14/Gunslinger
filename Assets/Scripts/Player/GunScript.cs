@@ -62,7 +62,10 @@ namespace Dasky14.Gunslinger
                     collision.gameObject.SendMessage("TakeDamage");
                 }
             }
+        }
 
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
             if ((m_fFireTimer) <= 0f)
             {
                 Shoot();

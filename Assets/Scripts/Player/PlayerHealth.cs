@@ -11,8 +11,8 @@ namespace Dasky14.Gunslinger
 
         public static void TakeDamage()
         {
+            AudioManager.PlayClip("PlayerHurt");
             c_iHealth--;
-            Debug.Log(c_iHealth);
             if (c_iHealth <= 0)
             {
                 Die();

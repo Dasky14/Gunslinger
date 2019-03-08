@@ -508,6 +508,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 171214202701041254, guid: 71a66335e6c5d7244bb647b65d949474,
+        type: 3}
+      propertyPath: m_sSounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 171214202701041254, guid: 71a66335e6c5d7244bb647b65d949474,
+        type: 3}
+      propertyPath: m_sSounds.Array.data[2].m_sName
+      value: PlayerHurt
+      objectReference: {fileID: 0}
+    - target: {fileID: 171214202701041254, guid: 71a66335e6c5d7244bb647b65d949474,
+        type: 3}
+      propertyPath: m_sSounds.Array.data[2].m_sClip
+      value: 
+      objectReference: {fileID: 8300000, guid: cf895e82e42341a42abe9440a3eb2324, type: 3}
+    - target: {fileID: 171214202701041254, guid: 71a66335e6c5d7244bb647b65d949474,
+        type: 3}
+      propertyPath: m_sSounds.Array.data[2].m_fVolumeMult
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71a66335e6c5d7244bb647b65d949474, type: 3}
 --- !u!1001 &6920772537087502707

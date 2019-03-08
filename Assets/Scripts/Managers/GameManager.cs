@@ -14,10 +14,11 @@ namespace Dasky14.Gunslinger
         [Header("Scene references")]
         public GameObject m_goPlayerObject;
         public GameObject m_goCamera;
-        private Camera m_gcCamera;
+        public Camera m_gcCamera;
         public Transform m_tGunContainer;
         public Transform m_tBackgroundContainer;
         public ParticleSystem m_psEnemyDeathParticles;
+        public GameObject m_goScoreParticles;
 
         [Header("Level variables")]
         [SerializeField]
@@ -106,10 +107,12 @@ namespace Dasky14.Gunslinger
         {
             if (!instance)
                 return;
-            instance.m_iScore += score;
-            UIManager.instance?.UpdateScoreText();
+
             instance.m_psEnemyDeathParticles.transform.position = pos;
             instance.m_psEnemyDeathParticles.Play();
+
+            ScoreParticles newParticles = Instantiate(instance.m_goScoreParticles, pos, Quaternion.identity).GetComponent<ScoreParticles>();
+            newParticles.m_iScore = score;
 
             AudioManager.PlayClip("DeathFart");
         }

@@ -11,7 +11,7 @@ namespace Dasky14.Gunslinger
 
         public static void TakeDamage()
         {
-            AudioManager.PlayClip("PlayerHurt");
+            AudioManager.PlayClip("PlayerHurt", AudioManager.m_fEffectVolume);
             c_iHealth--;
             if (c_iHealth <= 0)
             {

@@ -65,7 +65,7 @@ namespace Dasky14.Gunslinger
             Rigidbody2D gunRB = newGun.GetComponent<Rigidbody2D>();
             gunRB.AddForce(m_vMouseDirection * m_fMagnitude * m_fThrowForceMultiplier);
             gunRB.AddTorque(Random.Range(m_fThrowTorqueRange.x, m_fThrowTorqueRange.y));
-            AudioManager.PlayClip("Throw");
+            AudioManager.PlayClip("Throw", AudioManager.m_fEffectVolume);
         }
     }
 }

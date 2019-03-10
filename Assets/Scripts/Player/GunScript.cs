@@ -15,6 +15,7 @@ namespace Dasky14.Gunslinger
         [SerializeField]
         private float m_fFireInterval = 0.75f;
         private float m_fFireTimer = 0f;
+        private float m_fShootSensitivity = 5f;
 
         private float m_fTimeToDie = 30f;
         private float m_fCollisionTimeToDie = 5f;
@@ -62,10 +63,10 @@ namespace Dasky14.Gunslinger
                     collision.gameObject.SendMessage("TakeDamage");
                 }
             }
-        }
 
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
+            if (collision.relativeVelocity.magnitude < m_fShootSensitivity)
+                return;
+
             if ((m_fFireTimer) <= 0f)
             {
                 Shoot();
@@ -77,6 +78,7 @@ namespace Dasky14.Gunslinger
         {
             if (m_iAmmo <= 0)
                 return;
+            AudioManager.PlayClip("GunShot", AudioManager.m_fEffectVolume);
             m_iAmmo--;
             Instantiate(m_goBulletPrefab, m_tShootPoint.position, transform.rotation);
         }

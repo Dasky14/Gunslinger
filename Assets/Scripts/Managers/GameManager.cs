@@ -114,7 +114,7 @@ namespace Dasky14.Gunslinger
             ScoreParticles newParticles = Instantiate(instance.m_goScoreParticles, pos, Quaternion.identity).GetComponent<ScoreParticles>();
             newParticles.m_iScore = score;
 
-            AudioManager.PlayClip("DeathFart");
+            AudioManager.PlayClip("DeathFart", AudioManager.m_fEffectVolume);
         }
     }
 }

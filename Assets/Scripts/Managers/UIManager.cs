@@ -24,7 +24,6 @@ namespace Dasky14.Gunslinger
         private void Update()
         {
             UpdateHealthBar();
-            print(GetScoreWorldPos());
         }
 
         void UpdateHealthBar()

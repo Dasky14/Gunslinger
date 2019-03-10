@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2794004518625008727}
   - component: {fileID: 2794004518625008726}
   - component: {fileID: 7432201072267658691}
-  - component: {fileID: 5266775877350784270}
   m_Layer: 11
   m_Name: Gun1
   m_TagString: Untagged
@@ -142,22 +141,6 @@ MonoBehaviour:
     type: 3}
   m_iAmmo: 6
   m_fFireInterval: 0.75
---- !u!70 &5266775877350784270
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2794004518625008713}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 11, y: 6}
-  m_Direction: 1
 --- !u!1 &3110257687615612053
 GameObject:
   m_ObjectHideFlags: 0

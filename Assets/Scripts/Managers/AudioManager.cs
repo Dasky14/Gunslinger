@@ -8,6 +8,9 @@ namespace Dasky14.Gunslinger
     {
         public static AudioManager instance;
 
+        public static float m_fMusicVolume = 1;
+        public static float m_fEffectVolume = 1;
+
         [SerializeField]
         private Sound[] m_sSounds = null;
         private AudioSource m_gcAudioSource;

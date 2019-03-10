@@ -99,10 +99,5 @@ namespace Dasky14.Gunslinger
         {
             m_rbPlayerBody.velocity = new Vector2(m_rbPlayerBody.velocity.x, m_fPlayerJumpSpeed);
         }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.DrawWireCube(transform.position + Vector3.down * m_fGroundDetectionRange, new Vector3(1, 1));
-        }
     }
 }

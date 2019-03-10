@@ -511,7 +511,7 @@ PrefabInstance:
     - target: {fileID: 171214202701041254, guid: 71a66335e6c5d7244bb647b65d949474,
         type: 3}
       propertyPath: m_sSounds.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 171214202701041254, guid: 71a66335e6c5d7244bb647b65d949474,
         type: 3}
@@ -527,6 +527,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_sSounds.Array.data[2].m_fVolumeMult
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 171214202701041254, guid: 71a66335e6c5d7244bb647b65d949474,
+        type: 3}
+      propertyPath: m_sSounds.Array.data[3].m_sName
+      value: GunShot
+      objectReference: {fileID: 0}
+    - target: {fileID: 171214202701041254, guid: 71a66335e6c5d7244bb647b65d949474,
+        type: 3}
+      propertyPath: m_sSounds.Array.data[3].m_sClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 213ed4156cd64c64997655cdb06fe106, type: 3}
+    - target: {fileID: 171214202701041254, guid: 71a66335e6c5d7244bb647b65d949474,
+        type: 3}
+      propertyPath: m_sSounds.Array.data[3].m_fVolumeMult
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 171214202701041254, guid: 71a66335e6c5d7244bb647b65d949474,
+        type: 3}
+      propertyPath: m_sSounds.Array.data[0].m_fVolumeMult
+      value: 0.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71a66335e6c5d7244bb647b65d949474, type: 3}

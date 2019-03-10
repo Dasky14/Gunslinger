@@ -2,6 +2,10 @@
 
 namespace Dasky14.Gunslinger
 {
+    /// <summary>
+    /// A simple class that contains all information needed to play a sound.
+    /// Contains the volume multiplier, name, and the AudioClip itself.
+    /// </summary>
     [System.Serializable]
     public class Sound
     {

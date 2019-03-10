@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 namespace Dasky14.Gunslinger
 {
+    /// <summary>
+    /// Slider that updates the effect volume
+    /// </summary>
     public class EffectSlider : MonoBehaviour
     {
         [SerializeField]

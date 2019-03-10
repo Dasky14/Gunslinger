@@ -4,6 +4,9 @@ namespace Dasky14.Gunslinger
 {
     public class PlayerShooting : MonoBehaviour
     {
+
+        #region Variables
+
         private LineRenderer m_gcLine = null;
         private Camera m_gcCamera;
         private float m_fMagnitude = 0f;
@@ -25,6 +28,8 @@ namespace Dasky14.Gunslinger
         [Header("Guns!")]
         [SerializeField]
         private GameObject[] m_goGuns = null;
+
+        #endregion
 
         private void Start()
         {

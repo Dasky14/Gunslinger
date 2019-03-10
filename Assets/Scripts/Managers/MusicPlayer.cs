@@ -15,6 +15,10 @@ namespace Dasky14.Gunslinger
             DontDestroyOnLoad(gameObject);
         }
 
+        /// <summary>
+        /// This simply plays a Sound given to it, if none are playing currently.
+        /// </summary>
+        /// <param name="sound">A Sound object to play.</param>
         public void Play(Sound sound)
         {
             if (!m_gcMusicSource.isPlaying)
@@ -26,11 +30,17 @@ namespace Dasky14.Gunslinger
             }
         }
 
+        /// <summary>
+        /// Stops any currently playing music.
+        /// </summary>
         public void Stop()
         {
             m_gcMusicSource.Stop();
         }
 
+        /// <summary>
+        /// Gets new volume of music from AudioManager.
+        /// </summary>
         public void UpdateVolume()
         {
             m_gcMusicSource.volume = AudioManager.m_fMusicVolume * m_sSound.m_fVolumeMult;

@@ -27,6 +27,9 @@ namespace Dasky14.Gunslinger
             }
         }
 
+        /// <summary>
+        /// Kills the bullet.
+        /// </summary>
         void Die()
         {
             if (!m_bDead)
@@ -36,12 +39,14 @@ namespace Dasky14.Gunslinger
                 m_bDead = true;
             }
         }
-
+        
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            // Only do triggers if not dead
             if (m_bDead)
                 return;
 
+            // Damage different things
             switch (collision.gameObject.tag)
             {
                 case "Player":
@@ -54,6 +59,7 @@ namespace Dasky14.Gunslinger
                     break;
             }
 
+            // Then die.
             Die();
         }
     }

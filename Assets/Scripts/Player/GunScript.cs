@@ -4,6 +4,9 @@ namespace Dasky14.Gunslinger
 {
     public class GunScript : MonoBehaviour
     {
+
+        #region Variables
+
         [SerializeField]
         private Transform m_tShootPoint = null;
         [SerializeField]
@@ -21,6 +24,8 @@ namespace Dasky14.Gunslinger
         private bool m_bIsDead = false;
         private bool m_bHasCollided = false;
 
+        #endregion
+
         private void Start()
         {
             m_fDieTimer = m_fTimeToDie;
@@ -35,6 +40,9 @@ namespace Dasky14.Gunslinger
                 Die();
         }
 
+        /// <summary>
+        /// This kills the gun slowly.
+        /// </summary>
         void Die()
         {
             if (!m_bIsDead)
@@ -62,9 +70,11 @@ namespace Dasky14.Gunslinger
                 }
             }
 
+            // Return if collision isn't hard enough
             if (collision.relativeVelocity.magnitude < m_fShootSensitivity)
                 return;
 
+            // Shoot if the timer has gone out
             if ((m_fFireTimer) <= 0f)
             {
                 Shoot();
@@ -72,6 +82,9 @@ namespace Dasky14.Gunslinger
             }
         }
 
+        /// <summary>
+        /// Shoots a bullet forward, reduces ammo reserves.
+        /// </summary>
         void Shoot()
         {
             if (m_iAmmo <= 0)

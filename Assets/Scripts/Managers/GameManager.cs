@@ -42,11 +42,13 @@ namespace Dasky14.Gunslinger
 
         private void Awake()
         {
+            // Singleton pattern
             if (instance == null)
                 instance = this;
             else
                 Destroy(gameObject);
 
+            // Load the HUD of the game, if it isn't already loaded
             if (m_bLoadUI)
             {
                 if (!UIManager.instance)
@@ -59,6 +61,7 @@ namespace Dasky14.Gunslinger
         private void Start()
         {
             m_gcCamera = m_goCamera.GetComponent<Camera>();
+            PlayerHealth.ResetHealth();
         }
 
         private void Update()
@@ -70,12 +73,18 @@ namespace Dasky14.Gunslinger
                 EndTheGame();
         }
 
+        /// <summary>
+        /// Slowly lerps timescale to 0 and opends ending menu.
+        /// </summary>
         void EndTheGame()
         {
             Time.timeScale = Mathf.Lerp(Time.timeScale, 0, 0.8f * Time.unscaledDeltaTime);
             UIManager.instance.OpenEndMenu();
         }
 
+        /// <summary>
+        /// Scrolls the images in m_tBackgroundContainer
+        /// </summary>
         void ScrollBackgrounds()
         {
             foreach (Transform image in m_tBackgroundContainer)
@@ -86,6 +95,9 @@ namespace Dasky14.Gunslinger
             }
         }
 
+        /// <summary>
+        /// Spawns enemies as random intervals.
+        /// </summary>
         void SpawnEnemies()
         {
             if (m_goEnemyPrefabs == null || m_goEnemyPrefabs.Length == 0)
@@ -98,6 +110,9 @@ namespace Dasky14.Gunslinger
             }
         }
 
+        /// <summary>
+        /// Spawns a tumbleweed at random intervals.
+        /// </summary>
         void SpawnWeed()
         {
             if ((m_fWeedSpawnTimer -= Time.deltaTime) <= 0f)
@@ -108,6 +123,11 @@ namespace Dasky14.Gunslinger
             }
         }
 
+        /// <summary>
+        /// This is called by the enemy when it dies, and it increments score and makes a score particle from death position.
+        /// </summary>
+        /// <param name="pos">Position of the dead enemy.</param>
+        /// <param name="score">How much score should be increased.</param>
         public static void EnemyDeath(Vector2 pos, int score)
         {
             if (!instance)

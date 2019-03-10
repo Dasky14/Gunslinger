@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 namespace Dasky14.Gunslinger
 {
+    /// <summary>
+    /// Slider that updates the music volume.
+    /// </summary>
     public class MusicSlider : MonoBehaviour
     {
         [SerializeField]

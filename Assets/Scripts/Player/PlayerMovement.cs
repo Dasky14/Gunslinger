@@ -49,16 +49,21 @@ namespace Dasky14.Gunslinger
         }
 
         // All player movement is in FixedUpdate() to not screw up the physics
-	    void FixedUpdate () {
+	    private void FixedUpdate ()
+        {
+            // Sets the player's X velocity according to input
 		    Vector2 playerMovement = new Vector2(m_fHorizInput * m_fPlayerSpeed, m_rbPlayerBody.velocity.y);
 		    m_rbPlayerBody.velocity = playerMovement + GameManager.instance.m_vScrollDirection;
 
-            float fallingMult = m_rbPlayerBody.velocity.y >= 0 ? m_fJumpingFloatMult : 1f; // Make the player floatier when going up
+            // Make the player floatier when going up
+            float fallingMult = m_rbPlayerBody.velocity.y >= 0 ? m_fJumpingFloatMult : 1f; 
 		    m_rbPlayerBody.velocity += Vector2.down * m_fGravity * fallingMult * Time.deltaTime;
-
+            
             bool isJumping = false;
+            // Check whether the player is on the ground
             if (Physics2D.BoxCast(transform.position, new Vector2(1f, 1f), 0, Vector2.down, m_fGroundDetectionRange, LayerMask.GetMask("Ground")))
             {
+                // If grounded, reset air jumps to 0
                 m_iCurrentAirJumps = 0;
             }
             else
@@ -66,18 +71,23 @@ namespace Dasky14.Gunslinger
                 isJumping = true;
             }
 
+            // If jump has been pressed on the most recent frame
 		    if (m_bJumpPressed) {
                 if (!isJumping)
                 {
+                    // If grounded, jump
                     Jump();
                 }
                 else if (m_iCurrentAirJumps < m_iMaxAirJumps)
                 {
+                    // If there are air jumps left, jump
                     Jump();
                     m_psJumpParticles.Play();
                     m_iCurrentAirJumps++;
                 }
 		    }
+
+            // Reset jump input to false
             m_bJumpPressed = false;
 	    }
     
@@ -95,6 +105,9 @@ namespace Dasky14.Gunslinger
             transform.position = newPos;
         }
 
+        /// <summary>
+        /// Adds jump velocity to player.
+        /// </summary>
         private void Jump()
         {
             m_rbPlayerBody.velocity = new Vector2(m_rbPlayerBody.velocity.x, m_fPlayerJumpSpeed);

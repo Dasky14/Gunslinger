@@ -29,6 +29,7 @@ namespace Dasky14.Gunslinger
         private float m_fSpawnTimer = 0f;
         public Vector2 m_vWeedSpawnTimeRange = new Vector2(5f, 8f);
         private float m_fWeedSpawnTimer = 0f;
+        public bool m_bLevelEnded = false;
 
         [Header("Enemies")]
         [SerializeField]
@@ -69,6 +70,14 @@ namespace Dasky14.Gunslinger
             ScrollBackgrounds();
             SpawnEnemies();
             SpawnWeed();
+            if (m_bLevelEnded)
+                EndTheGame();
+        }
+
+        void EndTheGame()
+        {
+            Time.timeScale = Mathf.Lerp(Time.timeScale, 0, 0.8f * Time.unscaledDeltaTime);
+            UIManager.instance.OpenEndMenu();
         }
 
         void ScrollBackgrounds()

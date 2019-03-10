@@ -12,6 +12,10 @@ namespace Dasky14.Gunslinger
 
         public TextMeshProUGUI m_gcScoreText = null;
         public Image m_gcHealthBar = null;
+        public GameObject m_goGameEndUI = null;
+        public RectTransform m_tScoreEndPos = null;
+        private bool m_bEndMenuOpened = false;
+        private float m_fScoreMoveTimer = 1.5f;
 
         private void Awake()
         {
@@ -24,6 +28,23 @@ namespace Dasky14.Gunslinger
         private void Update()
         {
             UpdateHealthBar();
+            if (m_bEndMenuOpened)
+                MoveScoreText();
+        }
+
+        public void OpenEndMenu()
+        {
+            if (m_bEndMenuOpened)
+                return;
+            m_bEndMenuOpened = true;
+
+            m_goGameEndUI.SetActive(true);
+        }
+
+        private void MoveScoreText()
+        {
+            if ((m_fScoreMoveTimer -= Time.unscaledDeltaTime) <= 0f)
+                m_gcScoreText.rectTransform.position = Vector2.Lerp(m_gcScoreText.rectTransform.position, m_tScoreEndPos.position, 2f * Time.unscaledDeltaTime);
         }
 
         void UpdateHealthBar()
@@ -43,6 +64,11 @@ namespace Dasky14.Gunslinger
         {
             Vector2 position = GameManager.instance.m_gcCamera.ScreenToWorldPoint(m_gcScoreText.transform.position);
             return position;
+        }
+
+        public void GoToMainMenu()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Dasky14.Gunslinger
 
         public static void Die()
         {
-            Debug.Log("Dead.");
+            GameManager.instance.m_bLevelEnded = true;
         }
     }
 }

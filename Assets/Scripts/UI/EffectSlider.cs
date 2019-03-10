@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace Dasky14.Gunslinger
 {
@@ -8,6 +7,13 @@ namespace Dasky14.Gunslinger
     {
         [SerializeField]
         private GameObject m_goOffImage = null;
+        [SerializeField]
+        private Slider m_gcSlider = null;
+
+        private void Start()
+        {
+            m_gcSlider.value = AudioManager.m_fEffectVolume;
+        }
 
         public void OnSliderChanged(float val)
         {

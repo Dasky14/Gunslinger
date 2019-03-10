@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Dasky14.Gunslinger
+﻿namespace Dasky14.Gunslinger
 {
     public class PlayerHealth
     {

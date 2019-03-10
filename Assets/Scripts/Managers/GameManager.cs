@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Dasky14.Gunslinger
 {
@@ -53,9 +51,7 @@ namespace Dasky14.Gunslinger
             {
                 if (!UIManager.instance)
                 {
-    #if UNITY_EDITOR
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(0, UnityEngine.SceneManagement.LoadSceneMode.Additive);
-    #endif
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Additive);
                 }
             }
         }

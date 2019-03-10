@@ -456,17 +456,17 @@ PrefabInstance:
     - target: {fileID: 4993605994867132602, guid: 71a66335e6c5d7244bb647b65d949474,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.18378912
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4993605994867132602, guid: 71a66335e6c5d7244bb647b65d949474,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.759552
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4993605994867132602, guid: 71a66335e6c5d7244bb647b65d949474,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.43081528
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4993605994867132602, guid: 71a66335e6c5d7244bb647b65d949474,
         type: 3}
@@ -507,46 +507,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 171214202701041254, guid: 71a66335e6c5d7244bb647b65d949474,
-        type: 3}
-      propertyPath: m_sSounds.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 171214202701041254, guid: 71a66335e6c5d7244bb647b65d949474,
-        type: 3}
-      propertyPath: m_sSounds.Array.data[2].m_sName
-      value: PlayerHurt
-      objectReference: {fileID: 0}
-    - target: {fileID: 171214202701041254, guid: 71a66335e6c5d7244bb647b65d949474,
-        type: 3}
-      propertyPath: m_sSounds.Array.data[2].m_sClip
-      value: 
-      objectReference: {fileID: 8300000, guid: cf895e82e42341a42abe9440a3eb2324, type: 3}
-    - target: {fileID: 171214202701041254, guid: 71a66335e6c5d7244bb647b65d949474,
-        type: 3}
-      propertyPath: m_sSounds.Array.data[2].m_fVolumeMult
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 171214202701041254, guid: 71a66335e6c5d7244bb647b65d949474,
-        type: 3}
-      propertyPath: m_sSounds.Array.data[3].m_sName
-      value: GunShot
-      objectReference: {fileID: 0}
-    - target: {fileID: 171214202701041254, guid: 71a66335e6c5d7244bb647b65d949474,
-        type: 3}
-      propertyPath: m_sSounds.Array.data[3].m_sClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 213ed4156cd64c64997655cdb06fe106, type: 3}
-    - target: {fileID: 171214202701041254, guid: 71a66335e6c5d7244bb647b65d949474,
-        type: 3}
-      propertyPath: m_sSounds.Array.data[3].m_fVolumeMult
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 171214202701041254, guid: 71a66335e6c5d7244bb647b65d949474,
-        type: 3}
-      propertyPath: m_sSounds.Array.data[0].m_fVolumeMult
-      value: 0.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71a66335e6c5d7244bb647b65d949474, type: 3}

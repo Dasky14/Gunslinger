@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
@@ -13,9 +11,11 @@ namespace Dasky14.Gunslinger
         public TextMeshProUGUI m_gcScoreText = null;
         public Image m_gcHealthBar = null;
         public GameObject m_goGameEndUI = null;
+        public GameObject m_goPauseMenu = null;
         public RectTransform m_tScoreEndPos = null;
         private bool m_bEndMenuOpened = false;
         private float m_fScoreMoveTimer = 1.5f;
+        private bool m_bPaused = false;
 
         private void Awake()
         {
@@ -27,6 +27,25 @@ namespace Dasky14.Gunslinger
     
         private void Update()
         {
+            if (!GameManager.instance.m_bLevelEnded)
+            {
+                if (Input.GetButtonDown("Pause"))
+                {
+                    m_bPaused = !m_bPaused;
+                }
+
+                if (m_bPaused)
+                {
+                    m_goPauseMenu.SetActive(true);
+                    Time.timeScale = 0f;
+                }
+                else
+                {
+                    m_goPauseMenu.SetActive(false);
+                    Time.timeScale = 1f;
+                }
+            }
+
             UpdateHealthBar();
             if (m_bEndMenuOpened)
                 MoveScoreText();
@@ -68,7 +87,7 @@ namespace Dasky14.Gunslinger
 
         public void GoToMainMenu()
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         }
     }
 }

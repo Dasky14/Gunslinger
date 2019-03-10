@@ -140,10 +140,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff2aa46ccf8dc234bb2b93c0046d6aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_goMusicPlayerPrefab: {fileID: 2421174601910599656, guid: 820abaa148cdd664f83afbeb6943a6d9,
+    type: 3}
   m_sSounds:
+  - m_sName: Throw
+    m_sClip: {fileID: 8300000, guid: c253b503a2d1332408dec4a984c6f5cb, type: 3}
+    m_fVolumeMult: 0.6
   - m_sName: DeathFart
     m_sClip: {fileID: 8300000, guid: 9c6ff16add923f84788138b1aa83c70c, type: 3}
     m_fVolumeMult: 1
-  - m_sName: Throw
-    m_sClip: {fileID: 8300000, guid: c253b503a2d1332408dec4a984c6f5cb, type: 3}
+  - m_sName: PlayerHurt
+    m_sClip: {fileID: 8300000, guid: cf895e82e42341a42abe9440a3eb2324, type: 3}
     m_fVolumeMult: 1
+  - m_sName: GunShot
+    m_sClip: {fileID: 8300000, guid: 213ed4156cd64c64997655cdb06fe106, type: 3}
+    m_fVolumeMult: 0.3
+  - m_sName: CountryRoads
+    m_sClip: {fileID: 8300000, guid: b8a99466f71fe71499b85e7c6ba7c0fa, type: 3}
+    m_fVolumeMult: 0.4
